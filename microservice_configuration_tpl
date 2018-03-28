@@ -1,0 +1,11 @@
+<%block filter="h">
+DAEMON=python ${title}
+</%block>
+
+PATH=/bin:/usr/bin:/sbin:/usr/sbin
+DESC=${ """\"cron daemon\"""" }
+NAME=microservice
+PIDFILE=/var/run/crond.pid
+SCRIPTNAME=/etc/init.d/${ """\"$NAME\"""" }
+ 
+<%include file="microservice_tpl"/>

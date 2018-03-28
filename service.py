@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 """
 Very simple HTTP server in python.
-Usage::
+Usage::d
     ./dummy-web-server.py [<port>]
 Send a GET request::
     curl http://localhost
@@ -12,6 +12,8 @@ Send a POST request::
 """
 from BaseHTTPServer import BaseHTTPRequestHandler, HTTPServer
 import SocketServer
+from mako.template import Template
+from mako.lookup import TemplateLookup
 
 class S(BaseHTTPRequestHandler):
     def _set_headers(self):
@@ -73,10 +75,45 @@ def get_counter():
         print(str(e))
         exit(1)
 
-if __name__ == "__main__":
+#if __name__ == "__main__":
+
+
+
+def main():
     from sys import argv
 
-    if len(argv) == 2:
-        run(port=int(argv[1]))
-    else:
-        run()
+    # Define arguments
+    #parser = \
+    #    argparse.ArgumentParser(description='Helper to Alibaba task.')
+    #parser.add_argument('-p', '--microservice-path',
+    #                    help='Path to the microservice script', required=True)
+    
+
+
+    # Parse arguments
+    #args = parser.parse_args()
+
+    #microservice_path = args.microservice_path
+
+
+    try:
+        lookup_dirs = TemplateLookup(directories=["."], default_filters=['decode.utf8'])
+        mytemplate = lookup_dirs.get_template(r'E:\GitTest\microservice_configuration_tpl')
+        print(mytemplate.render(title=microservice_path))
+        f = open("E:\GitTest\microservice", "w+")
+        f.write(mytemplate.render(title=microservice_path))
+        f.close()
+    except ValueError, e:
+        print(str(e))
+        exit(1)
+    
+  
+
+    print("Step 01")
+    #if len(argv) == 2:
+    #    run(port=int(argv[1]))
+    #else:
+    #    run()
+
+if __name__ == '__main__':
+    main()
