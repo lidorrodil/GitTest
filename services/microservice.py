@@ -10,14 +10,11 @@ Send a HEAD request::
 Send a POST request::
     curl -d "foo=bar&bin=baz" http://localhost
 """
-from sys import argv
 from BaseHTTPServer import BaseHTTPRequestHandler, HTTPServer
 import SocketServer
-import argparse
 
 PORT = 1882
-#PATH = "/var/lib/service/"
-PATH = "E:\\GitTest\\"
+PATH = "/var/lib/service/"
 
 class S(BaseHTTPRequestHandler):
     def _set_headers(self):
@@ -39,7 +36,7 @@ class S(BaseHTTPRequestHandler):
         increase_counter()
 
      
-def run(port, server_class=HTTPServer, handler_class=S):
+def run(server_class=HTTPServer, handler_class=S, port=PORT):
     server_address = ('', port)
     httpd = server_class(server_address, handler_class)
     print("Starting httpd...")
@@ -84,19 +81,9 @@ def get_counter():
         exit(1)
 
 if __name__ == "__main__":
-
-    # Define arguments
-    parser = \
-        argparse.ArgumentParser(description='Helper to Alibaba task.')
-    parser.add_argument('-p', '--port',
-                        help='Path to the pairs file', required=True)
-
-    # Parse arguments
-    args = parser.parse_args()
-
-    port = args.port
+    from sys import argv
 
     if len(argv) == 2:
         run(port=int(argv[1]))
     else:
-        run(int(port))
+        run()
