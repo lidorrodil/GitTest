@@ -19,7 +19,7 @@ DATE=$(date &apos;+%d-%m-%y_%H-%M-%S&apos;)
 JENKINS_HOME=/var/jenkins_home
 cd $JENKINS_HOME
 # Add general configurations, job configurations, and user content
-git add -- *.xml jobs/*/*.xml userContent/*
+git add -- *.xml jobs/*/*.xml userContent/* nodes/*
 # only add user configurations if they exist
 if [ -d users ]; then
     user_configs=$(ls users/*/config.xml)
